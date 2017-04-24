@@ -74,12 +74,13 @@ class Home extends React.Component {
             <div>by Richard Garfield</div>
           </div>*/}
 
-
-          <div style={{ flex: 1, margin: '50px' }}>
-            <div className="rules">
-            Game Rules
-          </div>
-          </div>
+          <Link to="/rules">
+            <div style={{ flex: 1, margin: '50px' }}>
+              <div className="rules" style={{ alignSelf: 'center', padding: '15px', borderRadius: '3px', backgroundColor: '#4990E2', color: 'white' }}>
+                Game Rules
+            </div>
+            </div>
+          </Link>
         </div>
       </div>
     );

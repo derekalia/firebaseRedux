@@ -65,7 +65,7 @@ body {
 .rules {
   display: flex;
   flex-wrap: wrap;
-  word-wrap: 
+  
 }
 .rules-text {
   overflow-wrap: break-word;
