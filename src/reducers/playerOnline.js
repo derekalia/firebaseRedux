@@ -1,26 +1,15 @@
-import {database} from '../firebase.js';
+import { database } from '../firebase';
 
-export default function(state = [], action) {
+
+// const game = database.ref('games/aqwewq334');
+
+
+export default function (state = [], action) {
   switch (action.type) {
-  case 'ADD_ONLINEPLAYER' : 
-    return 'lol';
-  default: 
-    console.log('reducer', state);
-    return state;
+    case 'UPDATE_PLAYERS' :
+      return action.players;
+    default:
+      return state;
   }
 }
 
-
-function showNames() {
-  var array = [];
-  database.ref('/users').on('value', (snapshot) => {               
-    snapshot.forEach(user =>{           
-      if (user.val().currentlyOn) {          
-        array.push(user.val().displayName);
-        console.log('Whos here', user.val().displayName);
-      }
-    });
-  }); 
-  console.log(array);
-  return array;
-}

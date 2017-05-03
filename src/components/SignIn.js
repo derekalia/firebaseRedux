@@ -1,21 +1,11 @@
 import React, { PropTypes } from 'react';
 
-
-const SignIn = ({ signIn }) => {
-  return (
-    <div className="SignIn">
-      <button
-        className="block"
-        onClick={signIn}
-      >
-        Sign In
-      </button>
-    </div>
+const SignIn = ({ signIn }) => (
+  <div className="nav-link" onClick={signIn}>Sign In</div>
   );
-};
 
 SignIn.propTypes = {
-  signIn: PropTypes.func
+  signIn: PropTypes.func,
 };
 
 export default SignIn;

@@ -1,20 +1,24 @@
-import {database} from '../firebase';
+import { database } from '../firebase';
+import { checkWin } from './checkWin';
 
-const usersRef = database.ref('users');
+export const addUser = user => ({
+  type: 'ADD_USER',
+  displayName: user.displayName,
+  uid: user.uid,
+  photoURL: user.photoURL,
+});
 
-export const addUser = (user) => {
-  return {
-    type: 'ADD_USER',
-    displayName: user.displayName,
-    uid: user.uid,
-    photoURL: user.photoURL
-  };
-};
+export const showOnlineUsersAction = players => ({
+  type: 'UPDATE_PLAYERS',
+  players,
+});
 
-export const startListeningForUsers = () =>{
-  return (dispatch) =>{
-    usersRef.on('child_added', (snapshot) =>{
-      dispatch(addUser(snapshot.val()));
-    });
-  };
+export const startListeningForUsers = () => (dispatch, storeState) => {
+  const gid = storeState().auth.gid;
+  const game = database.ref(`games/${gid}`);
+
+  game.child('/players').on('value', (players) => {
+    dispatch(showOnlineUsersAction(players.val()));
+    dispatch(checkWin(players.val()));
+  });
 };

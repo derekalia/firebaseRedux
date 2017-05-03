@@ -6,14 +6,14 @@ import thunk from 'redux-thunk';
 import reducer from './reducers/index';
 import initialState from './initial-state';
 import Application from './containers/ApplicationContainer';
-import './index.css';
 
 import { startListeningToAuthChanges } from './actions/auth';
-import { startListeningForUsers } from './actions/users';
+// import { startListeningForUsers } from './actions/users';
+import { showOnlineUsersAction } from './actions/users';
+import { startListeningGameChanges } from './actions/game';
 
-// console.log([thunk]);
 
-const middleware = [ thunk ];
+const middleware = [thunk];
 const enhancers = [];
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -22,16 +22,19 @@ const store = createStore(
   initialState,
   composeEnhancers(
     applyMiddleware(...middleware),
-    ...enhancers
-  )
+    ...enhancers,
+  ),
 );
 
+
 store.dispatch(startListeningToAuthChanges());
-store.dispatch(startListeningForUsers());
+// store.dispatch(startListeningForUsers());
+// store.dispatch(showOnlineUsersAction());
+// store.dispatch(startListeningGameChanges());
 
 ReactDOM.render(
   <Provider store={store}>
     <Application />
   </Provider>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
